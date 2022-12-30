@@ -1,1 +1,1 @@
-# tray-social-platform
+# Tray Social Platform
