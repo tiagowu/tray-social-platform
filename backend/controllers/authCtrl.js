@@ -37,7 +37,7 @@ const authCtrl = {
 
       await newUser.save();
       res.json({
-        msg: "registered success",
+        msg: "Registered successfully",
         accessToken,
         user: { ...newUser._doc, password },
       });
@@ -47,18 +47,58 @@ const authCtrl = {
   },
   login: async (req, res) => {
     try {
+      const { email, password } = req.body;
+
+      const user = await Users.findOne({ email }).populate("friends followings", "-password");
+      if (!user) return res.status(400).json({ msg: "User does not exist." });
+
+      const confirmPassword = await bcrypt.compare(password, user.password);
+      if (!confirmPassword) return res.status(400).json({ msg: "Password is incorrect." });
+
+      const accessToken = createAccessToken({ id: user._id });
+      const refreshToken = createRefreshToken({ id: user._id });
+
+      res.cookie("refreshtoken", refreshToken, {
+        httpOnly: true,
+        path: "/api/refresh_token",
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
+
+      res.json({
+        msg: "Logged in successfully",
+        accessToken,
+        user: { ...user._doc, password: "" },
+      });
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }
   },
   logout: async (req, res) => {
     try {
+      res.clearCookie("refreshtoken", { path: "/api/refresh_token" });
+      res.json({ msg: "Logged out" });
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }
   },
   generateAccessToken: async (req, res) => {
     try {
+      const refresh = req.cookies.refreshtoken;
+      if (!refresh) return res.status(400).json({ msg: "Please login now." });
+
+      jwt.verify(refresh, process.env.REFRESHTOKENSECRET, async (err, result) => {
+        if (err) return res.status(400).json({ msg: "Please login now." });
+        const user = await Users.findById(result.id)
+          .select("-password")
+          .populate("friends followings");
+        if (!user) return res.status(400).json({ msg: "User does not exist. " });
+        const accessToken = createAccessToken({ id: result.id });
+
+        res.json({
+          accessToken,
+          user,
+        });
+      });
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }
