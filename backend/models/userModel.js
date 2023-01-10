@@ -34,7 +34,7 @@ const UserSchema = mongoose.Schema(
     friends: [{ type: mongoose.Types.ObjectId, ref: "user" }],
     followings: [{ type: mongoose.Types.ObjectId, ref: "user" }],
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("user", UserSchema);
