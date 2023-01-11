@@ -9,12 +9,6 @@ const SignUp = () => {
       <div className="signup-container">
         <h1>Tray</h1>
         <SignUpForm />
-        <p>
-          Already have an account?{" "}
-          <Link to="/" className="login-link">
-            Log in
-          </Link>
-        </p>
       </div>
     </div>
   );

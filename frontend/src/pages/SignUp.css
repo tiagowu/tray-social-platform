@@ -14,13 +14,3 @@
   box-shadow: 0 6px 24px 0 rgb(0 0 0 / 5%), 0 0 0 1px rgb(0 0 0 / 8%);
   width: 350px;
 }
-
-.login-link {
-  color: #6f81a5;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.login-link:hover {
-  color: #485671;
-}
