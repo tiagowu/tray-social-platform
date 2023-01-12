@@ -1,17 +1,14 @@
 import React from "react";
+import LoginForm from "../components/LoginForm";
+import "./Login.css";
 
 const Login = () => {
   return (
-    <div>
-      <form>
-        <label for="user">Username:</label>
-        <input type="text" id="user" name="user" />
-        <br></br>
-        <label for="password">Password:</label>
-        <input type="text" id="password" name="password" />
-        <br></br>
-        <input type="submit" value="Submit"></input>
-      </form>
+    <div className="login">
+      <div className="login-container">
+        <h1>Tray</h1>
+        <LoginForm />
+      </div>
     </div>
   );
 };

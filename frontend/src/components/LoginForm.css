@@ -1,0 +1,56 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-button {
+  background-color: #6f81a5;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+.password-input {
+  display: inline-block;
+  position: relative;
+}
+
+.login-showpass {
+  background-color: transparent;
+  position: absolute;
+  border: 0;
+  border-radius: 4px;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+  right: 1px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.login-button:hover {
+  filter: brightness(90%);
+}
+
+.login-showpass:hover {
+  color: #6f81a5;
+}
+
+.signup-link {
+  color: #6f81a5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signup-link:hover {
+  color: #485671;
+}
+
+p {
+  text-align: center;
+}
