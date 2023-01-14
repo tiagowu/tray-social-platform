@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "./TextInput";
 import "./LoginForm.css";
+import { login } from "../redux/actions/authActions";
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [userData, setUserData] = useState({ email, password });
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setUserData({ ...userData, email, password });
+    dispatch(login({ email, password }));
   };
   return (
     <form className="login-form" onSubmit={handleSubmit}>
