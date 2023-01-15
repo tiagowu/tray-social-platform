@@ -50,10 +50,16 @@ const authCtrl = {
       const { email, password } = req.body;
 
       const user = await Users.findOne({ email }).populate("friends followings", "-password");
-      if (!user) return res.status(400).json({ msg: "User does not exist." });
+      if (!user)
+        return res
+          .status(400)
+          .json({ msg: "The email you entered isn’t connected to an account." });
 
       const confirmPassword = await bcrypt.compare(password, user.password);
-      if (!confirmPassword) return res.status(400).json({ msg: "Password is incorrect." });
+      if (!confirmPassword)
+        return res
+          .status(400)
+          .json({ msg: "Sorry, your password was incorrect. Please double-check your password." });
 
       const accessToken = createAccessToken({ id: user._id });
       const refreshToken = createRefreshToken({ id: user._id });
