@@ -4,7 +4,7 @@ import "./TextInput.css";
 const TextInput = ({ type, label, value, handleChange }) => {
   return (
     <div className="input-container">
-      <input type={type} value={value} onChange={handleChange} />
+      <input type={type} value={value} autoComplete="off" onChange={handleChange} />
       <label className={value && "filled"}>{label}</label>
     </div>
   );
