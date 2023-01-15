@@ -15,6 +15,12 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+.login-button:disabled:hover {
+  cursor: default;
+  filter: brightness(100%);
+}
+
 .password-input {
   display: inline-block;
   position: relative;
@@ -52,5 +58,10 @@
 }
 
 p {
-  text-align: center;
+  margin: 0px 0px 10px 0px;
+  width: 280px;
+}
+
+p.alert {
+  color: rgb(212, 67, 67);
 }
