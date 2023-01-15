@@ -3,22 +3,23 @@ import { Link } from "react-router-dom";
 import TextInput from "./TextInput";
 import "./LoginForm.css";
 import { login } from "../redux/actions/authActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const LoginForm = () => {
+  const { alert } = useSelector((state) => state);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password }));
   };
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <TextInput
-        type="email"
+        type="text"
         label="Email"
         value={email}
         handleChange={(e) => {
@@ -27,7 +28,7 @@ const LoginForm = () => {
       />
       <div className="password-input">
         <TextInput
-          type={showPass ? "type" : "password"}
+          type={showPass ? "text" : "password"}
           label="Password"
           value={password}
           handleChange={(e) => {
@@ -40,9 +41,14 @@ const LoginForm = () => {
           </button>
         ) : null}
       </div>
-      <button className="login-button" type="submit">
+      <button
+        className="login-button"
+        type="submit"
+        disabled={!email || !password || password.length < 8}
+      >
         Login
       </button>
+      {alert.error && <p className="alert">{alert.error}</p>}
       <p>
         Don't have an account?{" "}
         <Link to="/signup" className="signup-link">
