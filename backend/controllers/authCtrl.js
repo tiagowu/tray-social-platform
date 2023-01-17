@@ -5,14 +5,19 @@ const jwt = require("jsonwebtoken");
 const authCtrl = {
   signup: async (req, res) => {
     try {
-      const { email, fullname, username, password } = req.body;
+      const { email, fullName, username, password } = req.body;
 
-      const newUsername = username.toLowerCase();
-      const confirmUsername = await Users.findOne({ username: newUsername });
-      if (confirmUsername) return res.status(400).json({ msg: "This username already exists." });
+      const emailRegex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const validEmail = await email.match(emailRegex);
+      if (!validEmail) return res.status(400).json({ msg: "Please enter a valid email." });
 
       const confirmEmail = await Users.findOne({ email: email });
       if (confirmEmail) return res.status(400).json({ msg: "This email is already in use." });
+
+      const newUsername = username.toLowerCase().replace(/ /g, "");
+      const confirmUsername = await Users.findOne({ username: newUsername });
+      if (confirmUsername) return res.status(400).json({ msg: "This username already exists." });
 
       if (password.length < 8)
         return res.status(400).json({ msg: "Password must be atleast 8 characters long." });
@@ -21,7 +26,7 @@ const authCtrl = {
 
       const newUser = new Users({
         email,
-        fullname,
+        fullName,
         username: newUsername,
         password: hashedPassword,
       });
@@ -37,7 +42,7 @@ const authCtrl = {
 
       await newUser.save();
       res.json({
-        msg: "Registered successfully",
+        msg: "Registered successfully.",
         accessToken,
         user: { ...newUser._doc, password },
       });
@@ -71,7 +76,7 @@ const authCtrl = {
       });
 
       res.json({
-        msg: "Logged in successfully",
+        msg: "Logged in successfully.",
         accessToken,
         user: { ...user._doc, password: "" },
       });
@@ -82,7 +87,7 @@ const authCtrl = {
   logout: async (req, res) => {
     try {
       res.clearCookie("refreshtoken", { path: "/api/refresh_token" });
-      res.json({ msg: "Logged out" });
+      res.json({ msg: "Logged out successfully." });
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }
@@ -90,14 +95,14 @@ const authCtrl = {
   generateAccessToken: async (req, res) => {
     try {
       const refresh = req.cookies.refreshtoken;
-      if (!refresh) return res.status(400).json({ msg: "Please login now." });
+      if (!refresh) return res.status(400).json({ msg: "Please login using your credentials." });
 
       jwt.verify(refresh, process.env.REFRESHTOKENSECRET, async (err, result) => {
-        if (err) return res.status(400).json({ msg: "Please login now." });
+        if (err) return res.status(400).json({ msg: "Please login using your credentials." });
         const user = await Users.findById(result.id)
           .select("-password")
           .populate("friends followings");
-        if (!user) return res.status(400).json({ msg: "User does not exist. " });
+        if (!user) return res.status(400).json({ msg: "Please login using your credentials." });
         const accessToken = createAccessToken({ id: result.id });
 
         res.json({
