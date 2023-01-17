@@ -37,6 +37,11 @@
   filter: brightness(90%);
 }
 
+.signup-button:disabled:hover {
+  cursor: default;
+  filter: brightness(100%);
+}
+
 .signup-showpass:hover {
   color: #6f81a5;
 }
@@ -52,5 +57,11 @@
 }
 
 p {
+  margin: 0px 0px 10px 0px;
   text-align: center;
+  width: 280px;
+}
+
+p.alert {
+  color: rgb(212, 67, 67);
 }
