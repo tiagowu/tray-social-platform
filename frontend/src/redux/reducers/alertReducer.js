@@ -4,8 +4,6 @@ const initialState = {};
 
 const alertReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ALERT_TYPES.CLEAR:
-      return initialState;
     case ALERT_TYPES.ALERT:
       return action.payload;
     default:
