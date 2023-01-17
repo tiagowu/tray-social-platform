@@ -15,6 +15,9 @@ const authCtrl = {
       const confirmEmail = await Users.findOne({ email: email });
       if (confirmEmail) return res.status(400).json({ msg: "This email is already in use." });
 
+      if (username.length < 6)
+        return res.status(400).json({ msg: "Username must be atleast 6 characters long." });
+
       const newUsername = username.toLowerCase().replace(/ /g, "");
       const confirmUsername = await Users.findOne({ username: newUsername });
       if (confirmUsername) return res.status(400).json({ msg: "This username already exists." });
@@ -53,6 +56,14 @@ const authCtrl = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
+
+      const emailRegex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const validEmail = await email.match(emailRegex);
+      if (!validEmail)
+        return res
+          .status(400)
+          .json({ msg: "Sorry, your email was invalid. Please double-check your email." });
 
       const user = await Users.findOne({ email }).populate("friends followings", "-password");
       if (!user)
@@ -106,6 +117,7 @@ const authCtrl = {
         const accessToken = createAccessToken({ id: result.id });
 
         res.json({
+          msg: "Refreshed successfully.",
           accessToken,
           user,
         });
