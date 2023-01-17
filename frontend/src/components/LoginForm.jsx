@@ -41,7 +41,7 @@ const LoginForm = () => {
       {alert.error && <p className="alert">{alert.error}</p>}
       <p>
         Don't have an account?{" "}
-        <Link to="/signup" className="signup-link">
+        <Link to="/signup" className="signup-link" onClick={clearAlert()}>
           Sign up
         </Link>
       </p>

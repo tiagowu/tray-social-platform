@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import TextInput from "./TextInput";
 import "./SignUpForm.css";
 import { signup } from "../redux/actions/authActions";
+import { clearAlert } from "../redux/actions/alertActions";
 
 const SignUpForm = () => {
   const { alert } = useSelector((state) => state);
@@ -42,7 +43,7 @@ const SignUpForm = () => {
       {alert.error && <p className="alert">{alert.error}</p>}
       <p>
         Already have an account?{" "}
-        <Link to="/" className="login-link">
+        <Link to="/" className="login-link" onClick={clearAlert()}>
           Log in
         </Link>
       </p>
