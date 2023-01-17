@@ -7,33 +7,39 @@ import { useDispatch, useSelector } from "react-redux";
 
 const LoginForm = () => {
   const { alert } = useSelector((state) => state);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const initialState = { email: localStorage.getItem("email"), password: "" };
+  const [userData, setUserData] = useState(initialState);
   const [showPass, setShowPass] = useState(false);
+  const { email, password } = userData;
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(login(userData));
   };
+
+  const handleDataChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+    localStorage.setItem("email", email);
+  };
+
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <TextInput
         type="text"
         label="Email"
+        name="email"
         value={email}
-        handleChange={(e) => {
-          setEmail(e.target.value);
-        }}
+        handleChange={handleDataChange}
       />
       <div className="password-input">
         <TextInput
           type={showPass ? "text" : "password"}
           label="Password"
+          name="password"
           value={password}
-          handleChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          handleChange={handleDataChange}
         />
         {password && "filled" ? (
           <button type="button" className="login-showpass" onClick={() => setShowPass(!showPass)}>
