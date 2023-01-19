@@ -108,3 +108,18 @@ export const refreshToken = () => async (dispatch) => {
     }
   }
 };
+
+export const logout = () => async (dispatch) => {
+  try {
+    localStorage.removeItem("login");
+    await postData("logout");
+    window.location.href = "/";
+  } catch (error) {
+    dispatch({
+      type: "ALERT",
+      payload: {
+        error: error.response.data.msg,
+      },
+    });
+  }
+};
