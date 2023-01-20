@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/authActions";
 import { AppBar, IconButton, Toolbar, Typography, Stack } from "@mui/material";
@@ -20,6 +20,14 @@ const Navbar = () => {
     minHeight: 50,
   };
 
+  const linkStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textDecoration: "none",
+    color: "black",
+  };
+
   return (
     <AppBar sx={{ background: "#6f81a5" }}>
       <Toolbar style={customizeToolbar} sx={{ justifyContent: "space-between", minHeight: 50 }}>
@@ -35,10 +43,12 @@ const Navbar = () => {
         </IconButton>
 
         <Stack direction="row" component="div" spacing={0}>
-          <Avatar sx={{ alignSelf: "center" }} />
-          <Typography variant="h7" alignSelf="center" margin="0px 12px 0px 8px">
-            {auth.user.fullname}
-          </Typography>
+          <Link to={`/profile/${auth.user._id}`} style={linkStyle}>
+            <Avatar />
+            <Typography variant="h7" margin="0px 12px 0px 8px">
+              {auth.user.fullname}
+            </Typography>
+          </Link>
           <IconButton sx={{ bgcolor: "#5b6d8f", "&:hover": { bgcolor: "#4b5c7d" } }}>
             <HomeIcon sx={{ fontSize: 30, color: "white" }} />
           </IconButton>
