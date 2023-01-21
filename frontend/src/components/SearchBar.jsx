@@ -7,10 +7,8 @@ const SearchBar = () => {
   return (
     <form className="search-form">
       <div className="search-container">
-        <input />
-        <label className="search-label" value={search} onChange={(e) => setSearch(e.target.value)}>
-          Search
-        </label>
+        <input value={search} onChange={(e) => setSearch(e.target.value)} />
+        <label className={search && "filled"}>Search</label>
       </div>
     </form>
   );
