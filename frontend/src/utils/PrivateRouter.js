@@ -1,9 +1,9 @@
 import React from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-const PrivateRouter = ({ props }) => {
+const PrivateRouter = ({ children }) => {
   const login = localStorage.getItem("login");
-  return login ? <Route {...props} /> : <Navigate to="/" />;
+  return login ? children : <Navigate to="/" />;
 };
 
 export default PrivateRouter;
