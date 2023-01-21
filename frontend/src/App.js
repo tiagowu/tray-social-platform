@@ -23,7 +23,15 @@ function App() {
       <Routes>
         <Route exact path="/" element={localStorage.getItem("login") || auth.token ? <Home /> : <Login />} />
         <Route exact path="/signup" element={localStorage.getItem("login") || auth.token ? <Navigate to="/" /> : <SignUp />} />
-        <PrivateRouter exact path="/profile/:id" element={<Profile />} />
+        <Route
+          exact
+          path="/profile/:id"
+          element={
+            <PrivateRouter>
+              <Profile />
+            </PrivateRouter>
+          }
+        />
       </Routes>
     </Router>
   );
