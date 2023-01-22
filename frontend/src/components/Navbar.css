@@ -1,9 +1,9 @@
-.appBar {
+.app-bar {
   background-color: #6f81a5;
 }
 
-.toolBar {
-  min-height: 50px;
+.tool-bar {
+  min-height: 60px;
   justify-content: space-between;
 }
 
@@ -16,15 +16,15 @@
   background-color: #5b6d8f;
 }
 
-.logo .buttonIcon {
+.logo .button-icon {
   font-size: 40px;
 }
 
 .logo .logoName {
-  margin: 0px 4px 0px 0px;
+  margin: 0px 0px 0px 4px;
 }
 
-.profileLink {
+.profile-link {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,20 +34,21 @@
 }
 
 .button,
-.profileLink {
+.profile-link {
   background: #5b6d8f;
 }
 
 .button:hover,
-.profileLink:hover {
+.profile-link:hover {
   background: #4b5c7d;
 }
 
-.profileName {
+.profile-name {
   margin: 0px 12px 0px 8px;
+  white-space: nowrap;
 }
 
-.button .buttonIcon {
+.button .button-icon {
   color: white;
   font-size: 30px;
 }
