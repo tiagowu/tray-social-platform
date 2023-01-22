@@ -25,29 +25,29 @@ const Navbar = () => {
 
   return (
     <StyledEngineProvider injectFirst>
-      <AppBar className="appBar">
-        <Toolbar className="toolBar">
+      <AppBar className="app-bar">
+        <Toolbar className="tool-bar">
           <Stack direction="row">
             <IconButton className="logo" disableRipple onClick={() => navigate("/")}>
-              <RoomServiceOutlinedIcon className="buttonIcon" />
-              <Typography className="logoName" variant="h4">
+              <RoomServiceOutlinedIcon className="button-icon" />
+              <Typography className="logo-name" variant="h4">
                 Tray
               </Typography>
             </IconButton>
             <SearchBar />
           </Stack>
           <Stack direction="row">
-            <Link className="profileLink" to={`/profile/${auth.user._id}`}>
+            <Link className="profile-link" to={`/profile/${auth.user._id}`}>
               <Avatar />
-              <Typography className="profileName" variant="h7">
+              <Typography className="profile-name" variant="h7">
                 {auth.user.fullname}
               </Typography>
             </Link>
             <IconButton className="button">
-              <HomeIcon className="buttonIcon" />
+              <HomeIcon className="button-icon" />
             </IconButton>
             <IconButton className="button" onClick={handleLogout}>
-              <LogoutIcon className="buttonIcon" />
+              <LogoutIcon className="button-icon" />
             </IconButton>
           </Stack>
         </Toolbar>
