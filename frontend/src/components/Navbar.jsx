@@ -2,12 +2,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AppBar, IconButton, Toolbar, Typography, Stack } from "@mui/material";
+import { AppBar, Avatar, IconButton, Toolbar, Typography, Stack } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
 import RoomServiceOutlinedIcon from "@mui/icons-material/RoomServiceOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
-import Avatar from "@mui/material/Avatar";
 
 import SearchBar from "./SearchBar";
 import { logout } from "../redux/actions/authActions";
@@ -40,7 +39,7 @@ const Navbar = () => {
             <Link className="profile-link" to={`/profile/${auth.user._id}`}>
               <Avatar />
               <Typography className="profile-name" variant="h7">
-                {auth.user.fullname}
+                {auth.user.fullName}
               </Typography>
             </Link>
             <IconButton className="button">
