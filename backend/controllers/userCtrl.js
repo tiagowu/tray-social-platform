@@ -5,7 +5,7 @@ const userCtrl = {
     try {
       const users = await Users.find({ username: { $regex: req.query.username } })
         .limit(10)
-        .select("fullName username");
+        .select("fullName username avatar");
 
       res.json({ users });
     } catch (err) {
