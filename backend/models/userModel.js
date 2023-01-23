@@ -18,10 +18,6 @@ const UserSchema = mongoose.Schema(
       unique: true,
       required: true,
       maxlength: 25,
-      // match: [
-      //   /^[A-Za-z0-9_.]+$/,
-      //   "Usernames should only use letters, numbers, underscores and periods.",
-      // ],
     },
     password: {
       type: String,
@@ -30,6 +26,10 @@ const UserSchema = mongoose.Schema(
     gender: {
       type: String,
       default: "male",
+    },
+    avatar: {
+      type: String,
+      default: "",
     },
     friends: [{ type: mongoose.Types.ObjectId, ref: "user" }],
     followings: [{ type: mongoose.Types.ObjectId, ref: "user" }],
