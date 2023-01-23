@@ -1,0 +1,29 @@
+.user-card {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 4px 4px;
+}
+
+.card-info {
+  margin-left: 4px;
+}
+
+.card-avatar {
+  height: 35px;
+  width: 35px;
+}
+
+.card-username {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+}
+
+.card-fullname {
+  color: rgb(159, 159, 159);
+  text-decoration: none;
+  font-size: 12px;
+  display: block;
+}
