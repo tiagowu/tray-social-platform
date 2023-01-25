@@ -1,5 +1,6 @@
 .app-bar {
   background-color: #6f81a5;
+  position: relative;
 }
 
 .tool-bar {
