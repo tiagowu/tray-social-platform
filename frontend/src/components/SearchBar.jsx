@@ -30,7 +30,7 @@ const SearchBar = () => {
     <div className="search-bar">
       <form className="search-form" onSubmit={(e) => e.preventDefault()}>
         <input className={search && "filled"} value={search} onChange={(e) => setSearch(e.target.value)} />
-        <div className={search && "search-users"}>
+        <div className={search && "search-users"} onClick={() => setSearch("")} onMouseDown={(event) => event.preventDefault()}>
           {search && users.length < 1 ? (
             <p className="search-message">No results found</p>
           ) : (
