@@ -25,7 +25,7 @@ function App() {
         <Route exact path="/signup" element={localStorage.getItem("login") || auth.token ? <Navigate to="/" /> : <SignUp />} />
         <Route
           exact
-          path="/profile/:id"
+          path="/user/:id"
           element={
             <PrivateRouter>
               <Profile />

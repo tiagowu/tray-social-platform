@@ -36,7 +36,7 @@ const Navbar = () => {
             <SearchBar />
           </Stack>
           <Stack direction="row">
-            <Link className="profile-link" to={`/profile/${auth.user._id}`}>
+            <Link className="profile-link" to={`/user/${auth.user._id}`}>
               <Avatar />
               <Typography className="profile-name" variant="h7">
                 {auth.user.fullName}
