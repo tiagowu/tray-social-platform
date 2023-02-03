@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 
 import { getUserProfile } from "../redux/actions/profileActions";
 
+import ProfileInfo from "./ProfileInfo";
+import "./UserProfile.css";
+
 const UserProfile = () => {
   const { id } = useParams();
   const { auth, profile } = useSelector((state) => state);
@@ -14,15 +17,21 @@ const UserProfile = () => {
   useEffect(() => {
     if (auth && auth.user && auth.user._id === id) {
       setUserData([auth.user]);
-    } else {
+    } else if (auth && auth.user) {
       dispatch(getUserProfile({ users: profile.users, id, auth }));
+      const newData = profile.users.filter((user) => user._id === id);
+      setUserData(newData);
     }
-  }, [auth.user, id, auth]);
+  }, [auth, id, dispatch, profile.users, auth.user]);
 
   return (
     <div>
-      {userData.length > 0 && userData.map((user) => <div key={user._id}>{user.fullName}</div>)}
-      <h1>Info - {id}</h1>
+      {userData.length > 0 &&
+        userData.map((user) => (
+          <div className="user-profile" key={user._id}>
+            <ProfileInfo user={user} />
+          </div>
+        ))}
     </div>
   );
 };
