@@ -1,0 +1,32 @@
+.profile-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.profile-info-left {
+  margin-right: 50px;
+}
+
+.profile-avatar {
+  height: 170px;
+  width: 170px;
+}
+
+.profile-info-right {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.profile-info-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile-username {
+  display: inline;
+  color: blue;
+  font-size: 20px;
+}
