@@ -1,32 +1,21 @@
-.profile-info {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-}
-
-.profile-info-left {
-  margin-right: 50px;
-}
-
-.profile-avatar {
-  height: 170px;
-  width: 170px;
-}
-
-.profile-info-right {
+.profileinfo-container {
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 100%;
 }
 
-.profile-info-top {
+.profileinfo-top {
+  width: 100%;
+}
+
+.profileinfo-center {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
-.profile-username {
-  display: inline;
-  color: blue;
-  font-size: 20px;
+.profileinfo-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
