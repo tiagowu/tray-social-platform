@@ -8,22 +8,26 @@ const ProfileInfo = ({ user }) => {
     <StyledEngineProvider injectFirst>
       <div className="profileinfo-container">
         <div className="profileinfo-top">
-          <img style={{ width: "100%" }} src="https://wallpaperaccess.com/full/1493766.jpg" />
-        </div>
-        <div className="profileinfo-center">
-          <Avatar className="profile-avatar" src={user.avatar} />
-          <Button>Follow</Button>
+          <img src="https://wallpaperaccess.com/full/1493766.jpg" />
         </div>
         <div className="profileinfo-bottom">
-          <div className="profile-stats">
+          <Avatar className="profileinfo-avatar" src={user.avatar} />
+
+          <div className="profileinfo-bottomcenter">
+            <div className="profileinfo-names">
+              <Typography variant="h5">Usernameeeeeeeeeeeeeeee</Typography>
+              <Typography variant="h6">Fullname</Typography>
+            </div>
+            <div className="profileinfo-follow">
+              <Button className="follow-button">Follow</Button>
+            </div>
+          </div>
+
+          <div className="profileinfo-stats">
             <Typography variant="h6">0 Posts</Typography>
             <Typography variant="h6">0 Followings</Typography>
             <Typography variant="h6">0 Folowers</Typography>
           </div>
-        </div>
-        <div className="profileinfo-bottomcenter">
-          <div className="profileinfo-username">Username</div>
-          <div className="profileinfo-fullname">Fullname</div>
         </div>
       </div>
     </StyledEngineProvider>
