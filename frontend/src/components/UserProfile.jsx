@@ -29,7 +29,7 @@ const UserProfile = () => {
       {userData.length > 0 &&
         userData.map((user) => (
           <div className="user-profile" key={user._id}>
-            <ProfileInfo user={user} />
+            <ProfileInfo auth={auth} id={id} user={user} profile={profile} />
           </div>
         ))}
     </div>
